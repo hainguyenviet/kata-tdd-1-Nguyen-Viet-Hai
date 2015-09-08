@@ -7,6 +7,7 @@ function createDifferentDelimeters(numberString)
 		{
 			delimeters = numberString.split(/\n/)[0];
 			delimeters = delimeters.replace("//", "");
+			delimeters = delimeters.replace("][", ",");
 		}
 	
 	return delimeters;
@@ -26,7 +27,8 @@ function Add(numberString) {
   var flagNeg =false;
   var negNumList="";
   var delimeters = createDifferentDelimeters(numberString);
-  var separators = [delimeters,"\n"];
+  var separators = [delimeters];
+  separators.push("\n");
   numberString= replaceDeliNoti(numberString);
   var listNum = numberString.split(new RegExp(separators.join('|'), 'g'));
   var res= 0;
@@ -41,7 +43,15 @@ function Add(numberString) {
 			  	
 			  }
 		  else
-			  res +=parseInt(listNum[i]);
+			  {
+			  	if(parseInt(listNum[i])>=1000)
+			  		{
+			  			res +=0;
+			  		}
+			  	else
+			  		res +=parseInt(listNum[i]);
+			  }
+			  
 	  	}
       }
   if(flagNeg)
@@ -50,7 +60,4 @@ function Add(numberString) {
 	  }
   return res;
 }
-
-
-
 
