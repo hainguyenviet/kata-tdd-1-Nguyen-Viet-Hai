@@ -23,6 +23,8 @@ function replaceDeliNoti(numberString)
 }
 
 function Add(numberString) {
+  var flagNeg =false;
+  var negNumList="";
   var delimeters = createDifferentDelimeters(numberString);
   var separators = [delimeters,"\n"];
   numberString= replaceDeliNoti(numberString);
@@ -32,9 +34,23 @@ function Add(numberString) {
       {
 	  if(listNum[i]!="")
 	  	{
-		  res +=parseInt(listNum[i]);
+		  if(parseInt(listNum[i])<0)
+			  {
+			  	flagNeg = true;
+			  	negNumList += listNum[i]+","
+			  	
+			  }
+		  else
+			  res +=parseInt(listNum[i]);
 	  	}
       }
+  if(flagNeg)
+	  {
+	  	return	"negatives not allowed:"+negNumList;
+	  }
   return res;
 }
+
+
+
 
